@@ -1,0 +1,1 @@
+/usr/bin/cc -g   CMakeFiles/ListTest.dir/main.c.o  -o ListTest  liblist.a 
