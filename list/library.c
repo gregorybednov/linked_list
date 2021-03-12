@@ -53,6 +53,7 @@ int append_front (list *l, value_t x){
     l->current->next = plnode;
     l->current->val = x;
     l->current = plnode;
+    l->pos++;
     return 0;
 }
 int append_before_root (list *l, value_t x){
@@ -60,11 +61,11 @@ int append_before_root (list *l, value_t x){
     lnode *plnode = malloc(sizeof(lnode));
     if (plnode==NULL) return errno;
     l->size++;
+    l->pos++;
 
     plnode->next = l->root;
-    l->root = plnode;
     plnode->val = x;
-
+    l->root = plnode;
     return 0;
 }
 
@@ -92,7 +93,6 @@ size_t next (list *l){
     return 1;
 }
 
-/* Группа функций удаления. */
 void remove_current (list *l, size_t i){
     if (l->current==l->current->next && l->current!=l->root) return;
     l->size--;
