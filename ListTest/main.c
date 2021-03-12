@@ -1,22 +1,26 @@
 #include <stdio.h>
 #include "../list/library.h"
 
-int main(void) {
+void print_list(list l){
+    go_to(&l,0);
+    size_t i;
+    for (i=0; i<l.size; i++){
+        printf("%d ", current_val(&l));
+        next(&l);
+    }
+    printf("\n");
+}
+
+int main(void) { /* Demo of working */
     list a;
     init(&a);
-    append_back(&a,1);
-    append_back(&a,4);
-    go_to(&a,1);
-    append_front(&a,2);
-    append_front(&a,3);
-    append_back(&a,5);
-    go_to(&a,0);
-    {
-        size_t i = 0;
-        for (i=0; i<a.size; i++){
-            printf("%d ", current_val(&a));
-            next(&a);
-        }
-    }
+    append_back(&a,4); /* 4 */
+    append_back(&a,6); /* 4 6 */
+    append_back(&a,5); /* 4 5 6 */
+    append_before_root(&a,1); /* 1 4 5 6 */
+    append_before_root(&a,0); /* 0 1 4 5 6 */
+    append_front(&a,2); /* 0 1 2 4 5 6 */
+    append_front(&a,3); /* 0 1 2 3 4 5 6 */
+    print_list(a);
     return 0;
 }
